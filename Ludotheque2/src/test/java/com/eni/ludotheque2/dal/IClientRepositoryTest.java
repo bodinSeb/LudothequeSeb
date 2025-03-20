@@ -2,6 +2,7 @@ package com.eni.ludotheque2.dal;
 
 import com.eni.ludotheque2.bo.Adresse;
 import com.eni.ludotheque2.bo.Client;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,22 +20,23 @@ public class IClientRepositoryTest {
     @Autowired
     private IAdresseRepository _repoAdresse;
 
-//    @Test
-//    @DisplayName("TEST CT01-FEAT1 Client Repository")
-//    void AjoutClientEtAdresse() {
-//
-//        //Arrange
-//        long nbClient = _repoClient.count();
-//        Client client = new Client("nom" + nbClient , "prenom" + nbClient, "email" + nbClient + "@eni.fr", "0101010101" );
-//        client.setAdresse(new Adresse((int)nbClient, "rue de" +nbClient, "79300", "Bressuire"));
-//
-//        //Act
-//        _repoClient.save(client);
-//
-//        //Assert
-//        assertNotNull(_repoClient);
-//        assertNotNull(client.getId_client());
-//    }
+    @Transactional
+    @Test
+    @DisplayName("TEST CT01-FEAT1 Client Repository")
+    void AjoutClientEtAdresse() {
+
+        //Arrange
+        long nbClient = _repoClient.count();
+        Client client = new Client("nom" + nbClient , "prenom" + nbClient, "emailTest" + nbClient + "@eni.fr", "0101010101" );
+        client.setAdresse(new Adresse((int)nbClient, "rue de" +nbClient, "79300", "Bressuire"));
+
+        //Act
+        _repoClient.save(client);
+
+        //Assert
+        assertNotNull(_repoClient);
+        assertNotNull(client.getId_client());
+    }
 
     @Test
     @DisplayName("TEST CT02-FEAT1 Client Repository")
@@ -52,6 +54,7 @@ public class IClientRepositoryTest {
         assertTrue(adresse != null);
     }
 
+    @Transactional
     @Test
     @DisplayName("TEST CT03-FEAT1 Client Repository")
     void DeleteClientEtAdresseEnCascade() {

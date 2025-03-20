@@ -2,6 +2,7 @@ package com.eni.ludotheque2.dal;
 
 import com.eni.ludotheque2.bo.Genre;
 import com.eni.ludotheque2.bo.Jeu;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +21,25 @@ public class IJeuRepositoryTest {
     @Autowired
     private IJeuRepository _repoJeu;
 
-//    @Test
-//    @DisplayName("TEST CT01-FEAT2 Genre Repository")
-//    void AjoutGenre() {
-//
-//        //Arrange
-//        // Créer plusieurs objets Jeu avec des genres associés
-//        Genre genre1 = _repoGenre.save(new Genre("Aventure"));
-//        Genre genre2 = _repoGenre.save(new Genre("Stratégie"));
-//        Genre genre3 = _repoGenre.save(new Genre("Famille"));
-//        Genre genre4 = _repoGenre.save(new Genre("Action"));
-//
-//        long nbJeu = _repoJeu.count();
-//
-//        //Assert
-//        assertTrue(nbJeu>0);
-//    }
+    @Transactional
+    @Test
+    @DisplayName("TEST CT01-FEAT2 Genre Repository")
+    void AjoutGenre() {
 
+        //Arrange
+        // Créer plusieurs objets Jeu avec des genres associés
+        Genre genre1 = _repoGenre.save(new Genre("Aventure"));
+        Genre genre2 = _repoGenre.save(new Genre("Stratégie"));
+        Genre genre3 = _repoGenre.save(new Genre("Famille"));
+        Genre genre4 = _repoGenre.save(new Genre("Action"));
+
+        long nbJeu = _repoJeu.count();
+
+        //Assert
+        assertTrue(nbJeu>0);
+    }
+
+    @Transactional
     @Test
     @DisplayName("TEST CT02-FEAT1 Client Repository")
     void AjoutJeu() {

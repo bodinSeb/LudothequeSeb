@@ -3,6 +3,7 @@ package com.eni.ludotheque2.dal;
 import com.eni.ludotheque2.bo.Exemplaire;
 import com.eni.ludotheque2.bo.Genre;
 import com.eni.ludotheque2.bo.Jeu;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class IExemplaireRepositoryTest {
     @Autowired
     private IExemplaireRepository _repoEx;
 
+    @Transactional
     @Test
     @DisplayName("TEST CT02-FEAT1 Client Repository")
     void AjoutExemplaire() {
