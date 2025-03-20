@@ -3,6 +3,7 @@ package com.eni.ludotheque2.bo;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -20,7 +21,7 @@ public class Jeu {
     @NonNull
     private String titre;
 
-    @Column(nullable = false, length = 13)
+    @Column(nullable = false, length = 13, unique = true)
     @NonNull
     private String reference;
 
@@ -42,5 +43,9 @@ public class Jeu {
             joinColumns = {@JoinColumn(name = "id_jeu")},
             inverseJoinColumns = {@JoinColumn(name = "id_genre")}
     )
-    private List<Genre> genres;
+    private List<Genre> genres =  new ArrayList<>();
+
+    public  void addGenre(Genre genre) {
+        genres.add(genre);
+    }
 }

@@ -27,6 +27,6 @@ public class Exemplaire {
     private boolean louable;
 
     @ManyToOne
-    @JoinColumn(name = "id_jeu")
-    private Jeu jeux;
+    @JoinColumn(name = "id_jeu", referencedColumnName = "id_jeu")
+    private Jeu jeu;
 }
