@@ -1,15 +1,13 @@
 package com.eni.ludotheque2.bo;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name="Jeux")
