@@ -6,19 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Date;
-
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Data
 @Entity
-@Table(name="Factures")
-public class Facture {
+@Table(name="Genres")
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_facture;
+    private int id_genre;
 
     @Column(nullable = false)
     @NonNull
-    private Date date_paiement;
+    private String libelle;
 }
