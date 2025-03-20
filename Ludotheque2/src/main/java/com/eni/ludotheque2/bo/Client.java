@@ -32,6 +32,9 @@ public class Client {
     @NonNull
     private String no_telephone;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL
+            //,fetch = FetchType.LAZY
+            ,orphanRemoval = true
+    )
     private Adresse adresse;
 }

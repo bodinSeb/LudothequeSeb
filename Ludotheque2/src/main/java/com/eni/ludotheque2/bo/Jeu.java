@@ -41,8 +41,8 @@ public class Jeu {
 
     @ManyToMany
     @JoinTable(name = "Jeu_Genre",
-            joinColumns = {@JoinColumn()},
-            inverseJoinColumns = {@JoinColumn()}
+            joinColumns = {@JoinColumn(name = "id_jeu")},
+            inverseJoinColumns = {@JoinColumn(name = "id_genre")}
     )
     private List<Genre> genres;
 }
