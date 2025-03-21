@@ -34,8 +34,8 @@ public class IExemplaireRepositoryTest {
         // Créer les exemplaires
         Exemplaire exemplaire1 = new Exemplaire("CODE12355", true);
         Exemplaire exemplaire2 = new Exemplaire("CODE67895", true);
-        exemplaire1.setJeux(jeu1);
-        exemplaire2.setJeux(jeu1);
+        //exemplaire1.(jeu1);
+        //.setJeux(jeu1);
 
         // Sauvegarder les exemplaires dans la base de données
         _repoEx.save(exemplaire1);
