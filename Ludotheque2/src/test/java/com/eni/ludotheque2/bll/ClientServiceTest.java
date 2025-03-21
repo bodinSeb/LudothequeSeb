@@ -3,13 +3,18 @@ package com.eni.ludotheque2.bll;
 import com.eni.ludotheque2.bo.Adresse;
 import com.eni.ludotheque2.bo.Client;
 import com.eni.ludotheque2.dal.IClientRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
@@ -19,9 +24,13 @@ public class ClientServiceTest {
     @Autowired
     private IClientService clientService;
 
+    @Autowired
+    private IClientRepository clientRepository;
+
 //    @MockitoBean
 //    private IClientRepository clientRepository;
 
+    @Transactional
     @Test
     @DisplayName("Ajout client cas positif")
     public void testAjouterClientCasPositif(){
@@ -39,5 +48,41 @@ public class ClientServiceTest {
         System.err.println("client : " + client);
         //Assert
         assertThat(client.getId_client()).isNotNull();
+    }
+
+    @Test
+    @DisplayName("Retrouver un client par son nom")
+    public void testfindClientByNom(){
+        //Act
+        List<Client> clients = clientService.findClientByNom("nom1");
+        //Assert
+        assertThat(clients.size()).isEqualTo(1);
+    }
+
+    @Transactional
+    @Test
+    @DisplayName("Modifier un client")
+    public void testUpdateClient(){
+        //Act
+        Client client = clientService.findClientById(1);
+        client.setPrenom("prenomModif");
+        clientRepository.save(client);
+
+        //Assert
+        assertEquals("prenomModif", client.getPrenom());
+    }
+
+    @Transactional
+    @Test
+    @DisplayName("Modifier l'adresse d'un client")
+    public void testUpdateAdresseClient(){
+        //Act
+        Client client = clientService.findClientById(1);
+        Adresse adresse = new Adresse(100, "rue de" +100, "79300", "Test");
+        client.setAdresse(adresse);
+        clientRepository.save(client);
+
+        //Assert
+        assertEquals("Test", client.getAdresse().getVille());
     }
 }
