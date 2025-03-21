@@ -1,5 +1,6 @@
 package com.eni.ludotheque2;
 
+import com.eni.ludotheque2.mock.MockBD;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
