@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class MockBD
-        implements CommandLineRunner
+        //implements CommandLineRunner
 {
 
     @Autowired
@@ -30,10 +30,10 @@ public class MockBD
     @Autowired
     IUtilisateurRepository repoUtilisateur;
 
-    @Override
-    public void run(String... args) throws Exception {
-        alimBD();  // Appel de la méthode alimBD() au démarrage de l'application
-    }
+//    @Override
+//    public void run(String... args) throws Exception {
+//        alimBD();  // Appel de la méthode alimBD() au démarrage de l'application
+//    }
 
     public void alimBD() {
 
