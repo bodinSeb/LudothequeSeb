@@ -1,5 +1,6 @@
 package com.eni.ludotheque2.bll;
 
+import com.eni.ludotheque2.bll.dto.FiltreJeu;
 import com.eni.ludotheque2.bo.Jeu;
 import com.eni.ludotheque2.dal.IJeuRepository;
 import lombok.NonNull;
@@ -34,5 +35,11 @@ public class JeuService implements IJeuService{
     @Override
     public void updateJeu(Jeu jeu) {
         jeuRepository.save(jeu);
+    }
+
+    @Override
+    public List<Jeu> findJeuByTitreOrAndidGenre(FiltreJeu filtre) {
+        List<Jeu> jeux = jeuRepository.findJeuByTitreOrAndIdGenre(filtre.getTitre(), filtre.getIdGenre());
+        return jeux;
     }
 }

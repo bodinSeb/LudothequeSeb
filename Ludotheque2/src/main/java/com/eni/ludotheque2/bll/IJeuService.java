@@ -1,6 +1,7 @@
 package com.eni.ludotheque2.bll;
 
 
+import com.eni.ludotheque2.bll.dto.FiltreJeu;
 import com.eni.ludotheque2.bo.Jeu;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface IJeuService {
     Jeu findJeuById(int id);
     List<Jeu> findJeuByTitre(String libelle);
     void updateJeu(Jeu jeu);
+    List<Jeu> findJeuByTitreOrAndidGenre(FiltreJeu filtre);
 }
