@@ -78,11 +78,11 @@ public class ClientServiceTest {
     public void testUpdateAdresseClient(){
         //Act
         Client client = clientService.findClientById(1);
-        Adresse adresse = new Adresse(100, "rue de" +100, "79300", "Test");
-        client.setAdresse(adresse);
-        clientRepository.save(client);
+
+        Adresse adresse = new Adresse(100, "rue de" +100, "79300", "TestModifie");
+        clientService.updateAdresseClient(1,adresse);
 
         //Assert
-        assertEquals("Test", client.getAdresse().getVille());
+        assertEquals("TestModifie", client.getAdresse().getVille());
     }
 }

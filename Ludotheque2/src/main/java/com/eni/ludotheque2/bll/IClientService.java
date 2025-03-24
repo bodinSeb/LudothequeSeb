@@ -9,6 +9,7 @@ public interface IClientService {
     void ajouterClient(Client client);
     Client findClientById(int id);
     List<Client> findClientByNom(String nom);
+    List<Client> findAllClient();
     void updateClient(Client client);
     void updateAdresseClient(int idClient, Adresse adresse);
 }
