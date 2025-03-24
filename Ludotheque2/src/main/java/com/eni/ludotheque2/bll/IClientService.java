@@ -12,4 +12,5 @@ public interface IClientService {
     List<Client> findAllClient();
     void updateClient(Client client);
     void updateAdresseClient(int idClient, Adresse adresse);
+    void deleteClient(int idClient);
 }

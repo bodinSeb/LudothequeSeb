@@ -57,4 +57,9 @@ public class ClientService implements IClientService{
         adresseBase.setVille(adresse.getVille());
         adresseRepository.save(adresseBase);
     }
+
+    @Override
+    public void deleteClient(int idClient) {
+        clientRepository.deleteById(idClient);
+    }
 }
