@@ -39,7 +39,11 @@ public class FactureService implements IFactureService {
         facture.setLocations(locations);
         facture.setMontantFacture(montantFacture);
         factureRepository.save(facture);
-        return facture;
+        if(facture.getId_facture() == 0){
+           throw new RuntimeException("La facture n'a pas été crée");
+        }else {
+            return facture;
+        }
     }
 
     private void MajMontantFacture(Location loc) {

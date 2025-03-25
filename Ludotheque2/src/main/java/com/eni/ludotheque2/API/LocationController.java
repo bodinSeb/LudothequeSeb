@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -35,19 +36,25 @@ public class LocationController {
     public ResponseEntity<?> createlocation(@RequestParam int idClient, @RequestParam int idExemplaire) {
         Client client = clientRepository.findById(idClient).get();
         Exemplaire exemplaire = exempRepository.findById(idExemplaire).get();
-        locService.creationLocation(client, exemplaire);
-        return ResponseEntity.status(HttpStatus.OK).body("La location a été créée avec succès");
+        try{
+            locService.creationLocation(client, exemplaire);
+            return ResponseEntity.status(HttpStatus.OK).body("La location a été créée avec succès");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @PatchMapping("/location/{id}/retour")
     //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<?> retour(@PathVariable Integer id) {
-        Location loc = locRepo.findById(id).get();
-        if(loc == null) {
+        Optional<Location> loc = locRepo.findById(id);
+        if(loc.isEmpty() ) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            locService.retourLocation(loc);
-            return ResponseEntity.status(HttpStatus.OK).body("Le retour a été validé avec succès");
         }
+        if (loc.get().getDate_retour() != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La location a déjà été retournée");
+        }
+        locService.retourLocation(loc.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Le retour a été validé avec succès");
     }
 }

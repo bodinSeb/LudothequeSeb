@@ -38,35 +38,20 @@ public class LocationService implements ILocationService{
             location.setExemplaire(exemplaire);
             location.setTarif_jour(exemplaire.getJeu().getTarif_jour());
             location.setDate_debut(new Date());
-            try {
-                locRepository.save(location);
-                exemplaire.setLouable(false);
-                exempRepository.save(exemplaire);
-
-            } catch (Exception e) {
-                throw new RuntimeException(e + "La location n'a pas été créée");
+            locRepository.save(location);
+            if(location.getId_location() == 0){
+                throw new RuntimeException("La location n'a pas été crée");
             }
+            exemplaire.setLouable(false);
+            exempRepository.save(exemplaire);
         }
     }
 
     @Override
     public void retourLocation(Location location) {
-        Optional loc = locRepository.findById(location.getId_location());
-        Location l = (Location) loc.get();
-        //System.out.println(l.getDate_retour());
-        if(loc.isEmpty()) {
-            throw new RuntimeException("La location n'existe pas");
-        } else if (l.getDate_retour() != null) {
-            throw new RuntimeException("La location est déjà retournée");
-        }else {
-            try {
-                location.setDate_retour(new Date());
-                locRepository.save(location);
-                location.getExemplaire().setLouable(true);
-                exempRepository.save(location.getExemplaire());
-            } catch (Exception e) {
-                throw new RuntimeException(e + "Problème lors du retour");
-            }
-        }
+        location.setDate_retour(new Date());
+        locRepository.save(location);
+        location.getExemplaire().setLouable(true);
+        exempRepository.save(location.getExemplaire());
     }
 }

@@ -23,30 +23,14 @@ public class FactureController {
 
     @Autowired
     private IFactureService factService;
-//    @Autowired
-//    private ILocationRepository locRepo;
-//    @Autowired
-//    private IClientRepository clientRepository;
-//    @Autowired
-//    private IExemplaireRepository exempRepository;
 
     @PostMapping("/facture")
-    //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<?> createFacture(@RequestBody CreateFacture cf) {
-        factService.createFacture(cf.getIdsLoc(), cf.getIdClient());
-
-        return ResponseEntity.status(HttpStatus.OK).body("La facture a été créée avec succès");
+        try {
+            Facture facture = factService.createFacture(cf.getIdsLoc(), cf.getIdClient());
+            return ResponseEntity.status(HttpStatus.OK).body("La facture a été créée avec succès");
+        }catch(RuntimeException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
-
-//    @PatchMapping("/location/{id}/retour")
-//    //@ResponseStatus(code= HttpStatus.OK)
-//    public ResponseEntity<?> retour(@PathVariable Integer id) {
-//        Location loc = locRepo.findById(id).get();
-//        if(loc == null) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        } else {
-//            locService.retourLocation(loc);
-//            return ResponseEntity.status(HttpStatus.OK).body("Le retour a été validé avec succès");
-//        }
-//    }
 }
