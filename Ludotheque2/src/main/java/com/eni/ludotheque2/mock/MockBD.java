@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class MockBD
-        //implements CommandLineRunner
+        implements CommandLineRunner
 {
 
     @Autowired
@@ -33,10 +33,10 @@ public class MockBD
     @Autowired
     IUtilisateurRepository repoUtilisateur;
 
-//    @Override
-//    public void run(String... args) throws Exception {
-//        alimBD();  // Appel de la méthode alimBD() au démarrage de l'application
-//    }
+    @Override
+    public void run(String... args) throws Exception {
+        alimBD();  // Appel de la méthode alimBD() au démarrage de l'application
+    }
 
     public void alimBD() {
 
@@ -95,6 +95,11 @@ public class MockBD
         Exemplaire exemplaire3 = new Exemplaire("CODEJeu201", true, jeu2);
         Exemplaire exemplaire4 = new Exemplaire("CODEJeu301", true, jeu3);
         Exemplaire exemplaire5 = new Exemplaire("CODEJeu302", true, jeu3);
+        exemplaire1.setLouable(false);
+        exemplaire2.setLouable(false);
+        exemplaire3.setLouable(false);
+        exemplaire4.setLouable(false);
+
         repoExemplaire.save(exemplaire1);
         repoExemplaire.save(exemplaire2);
         repoExemplaire.save(exemplaire3);
