@@ -27,6 +27,9 @@ public class Exemplaire {
     private boolean louable;
 
     @ManyToOne
+    @NonNull
     @JoinColumn(name = "id_jeu", referencedColumnName = "id_jeu")
     private Jeu jeu;
+
+
 }

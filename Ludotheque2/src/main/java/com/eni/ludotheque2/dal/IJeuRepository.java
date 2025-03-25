@@ -1,6 +1,5 @@
 package com.eni.ludotheque2.dal;
 
-import com.eni.ludotheque2.bll.dto.FiltreJeu;
 import com.eni.ludotheque2.bo.Jeu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

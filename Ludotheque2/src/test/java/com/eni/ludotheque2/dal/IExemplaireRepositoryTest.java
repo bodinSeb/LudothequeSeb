@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -24,7 +25,7 @@ public class IExemplaireRepositoryTest {
 
     @Transactional
     @Test
-    @DisplayName("TEST CT02-FEAT1 Client Repository")
+    @DisplayName("TEST Exemplaire Repository")
     void AjoutExemplaire() {
 
         //Arrange
@@ -32,13 +33,23 @@ public class IExemplaireRepositoryTest {
 
         // Sauvegarder les jeux dans la base de données
         // Créer les exemplaires
-        Exemplaire exemplaire1 = new Exemplaire("CODE12355", true);
-        Exemplaire exemplaire2 = new Exemplaire("CODE67895", true);
+
+        Exemplaire exemplaire1 = new Exemplaire("CODE12355", true, jeu1);
         //exemplaire1.(jeu1);
         //.setJeux(jeu1);
 
         // Sauvegarder les exemplaires dans la base de données
         _repoEx.save(exemplaire1);
-        _repoEx.save(exemplaire2);
+    }
+
+    @Test
+    @DisplayName("TEST Exemplaire Repository")
+    void RecupExemplaire() {
+
+        //Act
+        Exemplaire exemplaire = _repoEx.findById(2).get();
+
+        //Assert
+        assertNotNull(exemplaire);
     }
 }

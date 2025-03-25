@@ -1,6 +1,6 @@
 package com.eni.ludotheque2.bll;
 
-import com.eni.ludotheque2.bll.dto.FiltreJeu;
+import com.eni.ludotheque2.dto.FiltreJeu;
 import com.eni.ludotheque2.bo.Jeu;
 import com.eni.ludotheque2.dal.IJeuRepository;
 import lombok.NonNull;

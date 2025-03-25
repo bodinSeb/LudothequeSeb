@@ -42,6 +42,7 @@ public class ClientService implements IClientService{
 
     @Override
     public void updateClient(Client client) {
+        //TODO vérifier que client a un id
         clientRepository.save(client);
     }
 

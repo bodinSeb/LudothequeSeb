@@ -1,4 +1,4 @@
-package com.eni.ludotheque2.bll.dto;
+package com.eni.ludotheque2.dto;
 
 import lombok.Data;
 

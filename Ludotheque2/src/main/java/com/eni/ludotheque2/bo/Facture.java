@@ -7,6 +7,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -21,4 +22,7 @@ public class Facture {
     @Column(nullable = false)
     @NonNull
     private Date date_paiement;
+
+    @OneToMany
+    private List<Location> locations;
 }

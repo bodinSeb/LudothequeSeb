@@ -11,8 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class IJeuRepositoryTest {
@@ -65,5 +64,16 @@ public class IJeuRepositoryTest {
 
         //Assert
         assertTrue(nbJeu>0);
+    }
+
+    @Test
+    @DisplayName("TEST Recup jeu")
+    void RecupJeu() {
+
+        // Sauvegarder les jeux dans la base de données
+        Jeu jeu = _repoJeu.findById(1).get();
+
+        //Assert
+        assertNotNull(jeu);
     }
 }
