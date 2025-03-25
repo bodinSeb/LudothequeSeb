@@ -3,6 +3,7 @@ package com.eni.ludotheque2.API;
 import com.eni.ludotheque2.bll.IClientService;
 import com.eni.ludotheque2.bo.Adresse;
 import com.eni.ludotheque2.bo.Client;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,6 @@ public class ClientController {
     private IClientService clientService;
 
     @GetMapping("/clients")
-    //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<List<Client>> getClients() {
         List<Client> clients = clientService.findAllClient();
         if(clients == null || clients.isEmpty()) {
@@ -28,7 +28,6 @@ public class ClientController {
     }
 
     @GetMapping("/client/{id}")
-    //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<Client> getClientById(@PathVariable Integer id) {
         Client client = clientService.findClientById(id);
         if(client == null) {
@@ -38,11 +37,8 @@ public class ClientController {
     }
 
     @PostMapping ("/client")
-    //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<?> create(@RequestBody  Client client) {
-        System.err.println("CREATE : " + client);
         clientService.ajouterClient(client);
-        System.err.println("NOUVEAU CLIENT : " + client);
         if(client.getId_client() == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erreur lors de la création du client");
         }
@@ -50,15 +46,14 @@ public class ClientController {
     }
 
     @PutMapping("/client/{id}")
-    //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody  Client client) {
-        System.err.println("UPDATE : " + client);
         Client clientBase = clientService.findClientById(id);
         if(clientBase == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        //Pour éviter le mappage
+        //BeanUtils.copyProperties(client, clientBase, "idClient");
         Client clientUpdate = MapClientToClient(clientBase, client);
-        System.err.println("NOUVEAU CLIENT : " + clientUpdate);
         try {
             clientService.updateClient(clientUpdate);
             return ResponseEntity.status(HttpStatus.OK).body("modification réussie");
@@ -68,11 +63,8 @@ public class ClientController {
     }
 
     @PatchMapping("/client/{id}/adresse")
-    //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<?> updateAdresse(@PathVariable Integer id, @RequestBody Adresse adresse) {
-        System.err.println("UPDATE AAAAA : " + adresse);
         Client clientBase = clientService.findClientById(id);
-        System.err.println("CLIENT AAAAA : " + clientBase);
         if(clientBase == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -87,7 +79,6 @@ public class ClientController {
     }
 
     @DeleteMapping("/client/{id}")
-    //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         Client clientBase = clientService.findClientById(id);
         if(clientBase == null) {
