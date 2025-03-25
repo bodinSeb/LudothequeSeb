@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -50,7 +51,22 @@ public class LocationService implements ILocationService{
 
     @Override
     public void retourLocation(Location location) {
-        location.setDate_retour(new Date());
-
+        Optional loc = locRepository.findById(location.getId_location());
+        Location l = (Location) loc.get();
+        //System.out.println(l.getDate_retour());
+        if(loc.isEmpty()) {
+            throw new RuntimeException("La location n'existe pas");
+        } else if (l.getDate_retour() != null) {
+            throw new RuntimeException("La location est déjà retournée");
+        }else {
+            try {
+                location.setDate_retour(new Date());
+                locRepository.save(location);
+                location.getExemplaire().setLouable(true);
+                exempRepository.save(location.getExemplaire());
+            } catch (Exception e) {
+                throw new RuntimeException(e + "Problème lors du retour");
+            }
+        }
     }
 }

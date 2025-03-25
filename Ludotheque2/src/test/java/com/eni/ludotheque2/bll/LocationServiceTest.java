@@ -10,7 +10,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class LocationServiceTest {
@@ -27,7 +28,7 @@ public class LocationServiceTest {
     @Autowired
     private IExemplaireRepository exemplaireRepository;
 
-    //@Transactional
+    @Transactional
     @Test
     @DisplayName("Ajout loc cas positif")
     public void testAjouterLocCasPositif(){
@@ -48,45 +49,20 @@ public class LocationServiceTest {
         assertEquals(nbLoc +1, nbLoc2);
     }
 
-//    @Test
-//    @DisplayName("Retrouver un jeu par son libelle")
-//    public void testfindClientByNom(){
-//        //Act
-//        List<Jeu> jeux = jeuService.findJeuByTitre("Skyjo");
-//        //Assert
-//        assertThat(jeux.size()).isEqualTo(1);
-//    }
-//
-//    @Transactional
-//    @Test
-//    @DisplayName("Filtrer jeu avec titre et genre")
-//    public void testFiltrerJeuAvecTitreAndGenre(){
-//
-//        //Arrange
-//        FiltreJeu filtreJeu = new FiltreJeu();
-//        filtreJeu.setTitre("Skyjo");
-//        filtreJeu.setIdGenre(2);
-//
-//        //Recherche jeu avec filtre
-//        List<Jeu> jeuxFiltres = jeuService.findJeuByTitreOrAndidGenre(filtreJeu);
-//        System.out.println(jeuxFiltres);
-//        //Assert
-//        assertThat(jeuxFiltres.size()).isEqualTo(1);
-//    }
+    //@Transactional
+    @Test
+    @DisplayName("Ajout loc cas positif")
+    public void testRetourLocCasPositif(){
 
-//    @Transactional
-//    @Test
-//    @DisplayName("Filtrer jeu avec titre et genre")
-//    public void testFiltrerJeuAvecTitre(){
-//        //Arrange
-//        FiltreJeu filtreJeu = new FiltreJeu();
-//        filtreJeu.setTitre("Skyjo");
-//        System.err.println("RRRR" + filtreJeu);
-//
-//        //Recherche jeu avec filtre
-//        List<Jeu> jeuxFiltres = jeuService.findJeuByTitreOrAndidGenre(filtreJeu);
-//        System.err.println(jeuxFiltres);
-//        //Assert
-//        assertThat(jeuxFiltres.size()).isEqualTo(1);
-//    }
+        //Arrange
+        Location loc = locationRepository.findById(3).get();
+
+        // Act : Faire un retour de location
+        locationService.retourLocation(loc);
+        Exemplaire exemp = exemplaireRepository.findById(loc.getExemplaire().getId_exemplaire()).get();
+
+        //Assert
+        assertNotNull(loc.getDate_retour());
+        assertTrue(exemp.isLouable());
+    }
 }
