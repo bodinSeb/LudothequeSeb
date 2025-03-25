@@ -46,6 +46,11 @@ public class FactureService implements IFactureService {
         }
     }
 
+    @Override
+    public List<Facture> findFactureByIdClient(int idClient) {
+        return factureRepository.findFactureByIdClient(idClient);
+    }
+
     private void MajMontantFacture(Location loc) {
         long diffInMillies = loc.getDate_retour().getTime() - loc.getDate_debut().getTime();
         long nbJour = diffInMillies / (1000 * 60 * 60 * 24) + 1;

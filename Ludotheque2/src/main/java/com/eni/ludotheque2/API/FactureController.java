@@ -24,6 +24,12 @@ public class FactureController {
     @Autowired
     private IFactureService factService;
 
+
+    @GetMapping("factures/{idClient}")
+    public ResponseEntity<List<Facture>> findFactureByIdClient(@PathVariable int idClient) {
+        return ResponseEntity.ok(factService.findFactureByIdClient(idClient));
+    }
+
     @PostMapping("/facture")
     public ResponseEntity<?> createFacture(@RequestBody CreateFacture cf) {
         try {

@@ -66,4 +66,17 @@ public class FactureServiceTest {
         //Assert
         assertNotNull(facture);
     }
+
+    @Test
+    @DisplayName("Récup facture by idClient cas positif")
+    public void testRecupFactureClient(){
+
+        //Arrange
+
+        // Act : Créer une facture pour un retour d'une loc
+        List<Facture> factures = factureService.findFactureByIdClient(1);
+
+        //Assert
+        assertEquals(1, factures.size());
+    }
 }
