@@ -50,20 +50,20 @@ public class FactureServiceTest {
         assertNotNull(facture);
     }
 
-//    //@Transactional
-//    @Test
-//    @DisplayName("Ajout loc cas positif")
-//    public void testRetourLocCasPositif(){
-//
-//        //Arrange
-//        Location loc = locationRepository.findById(3).get();
-//
-//        // Act : Faire un retour de location
-//        locationService.retourLocation(loc);
-//        Exemplaire exemp = exemplaireRepository.findById(loc.getExemplaire().getId_exemplaire()).get();
-//
-//        //Assert
-//        assertNotNull(loc.getDate_retour());
-//        assertTrue(exemp.isLouable());
-//    }
+    @Transactional
+    @Test
+    @DisplayName("Ajout facture Plusieurs Loc cas positif")
+    public void testAjouterFacturePlusieursLocCasPositif(){
+
+        //Arrange
+        List<Integer> idsLoc = new ArrayList<Integer>();
+        idsLoc.add(3);
+        idsLoc.add(4);
+
+        // Act : Créer une facture pour un retour d'une loc
+        Facture facture = factureService.createFacture(idsLoc, 2);
+
+        //Assert
+        assertNotNull(facture);
+    }
 }

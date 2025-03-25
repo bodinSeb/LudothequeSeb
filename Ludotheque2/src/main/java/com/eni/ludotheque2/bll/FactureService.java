@@ -43,7 +43,8 @@ public class FactureService implements IFactureService {
     }
 
     private void MajMontantFacture(Location loc) {
-        int nbJour = loc.getDate_retour().getDay() - loc.getDate_debut().getDay() + 1;
+        long diffInMillies = loc.getDate_retour().getTime() - loc.getDate_debut().getTime();
+        long nbJour = diffInMillies / (1000 * 60 * 60 * 24) + 1;
         Float montantLoc = loc.getTarif_jour() * nbJour;
         montantFacture = montantFacture + montantLoc;
     }
