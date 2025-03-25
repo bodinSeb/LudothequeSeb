@@ -23,6 +23,10 @@ public class Facture {
     @NonNull
     private Date date_paiement;
 
+    @Column(nullable = false)
+    @NonNull
+    private Float montantFacture;
+
     @OneToMany
     private List<Location> locations;
 }
