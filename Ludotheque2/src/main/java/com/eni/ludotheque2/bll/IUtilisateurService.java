@@ -7,4 +7,5 @@ import java.util.List;
 public interface IUtilisateurService {
     void ajouterUtilisateur(Utilisateur util);
     List<Utilisateur> findAllUtilisateurs();
+    Utilisateur findByLogin(String login);
 }

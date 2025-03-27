@@ -5,9 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -27,8 +32,10 @@ public class Utilisateur {
     @NonNull
     private String password;
 
-    @ElementCollection
-    @CollectionTable(name = "utilisateur_roles", joinColumns = @JoinColumn(name = "utilisateur_id"))
-    @Column(name = "role", nullable = false)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "utilisateur_roles",
+            joinColumns = {@JoinColumn(name = "id_utilisateur")},
+            inverseJoinColumns = {@JoinColumn(name = "id_role")}
+    )
     private List<Role> roles = new ArrayList<>();
 }

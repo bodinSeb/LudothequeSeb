@@ -24,7 +24,7 @@ public class MockBD
     @Autowired
     IExemplaireRepository repoExemplaire;
     @Autowired
-    IFactureRepository repoFact;
+    IRoleRepository roleRepo;
     @Autowired
     IGenreRepository repoGenre;
     @Autowired
@@ -107,14 +107,21 @@ public class MockBD
         repoExemplaire.save(exemplaire4);
         repoExemplaire.save(exemplaire5);
 
+        //Création roles
+        Role role1 = new Role("admin");
+        Role role2 = new Role("employe");
+
+        roleRepo.save(role1);
+        roleRepo.save(role2);
+
         // Créer deux utilisateurs
         List<Role> roles1 = new ArrayList<>();
-        roles1.add(Role.EMPLOYE);
+        roles1.add(role2);
         Utilisateur utilisateur1 = new Utilisateur("seb", "seb");
         utilisateur1.setRoles(roles1);
         List<Role> roles2 = new ArrayList<>();
-        roles2.add(Role.ADMIN);
-        roles2.add(Role.EMPLOYE);
+        roles2.add(role1);
+        roles2.add(role2);
         Utilisateur utilisateur2 = new Utilisateur("admin", "admin");
         utilisateur2.setRoles(roles2);
 

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/locations")
 public class LocationController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class LocationController {
     @Autowired
     private IExemplaireRepository exempRepository;
 
-    @PostMapping("/location")
+    @PostMapping
     //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<?> createlocation(@RequestParam int idClient, @RequestParam int idExemplaire) {
         Client client = clientRepository.findById(idClient).get();
@@ -44,7 +44,7 @@ public class LocationController {
         }
     }
 
-    @PatchMapping("/location/{id}/retour")
+    @PatchMapping("/{id}/retour")
     //@ResponseStatus(code= HttpStatus.OK)
     public ResponseEntity<?> retour(@PathVariable Integer id) {
         Optional<Location> loc = locRepo.findById(id);

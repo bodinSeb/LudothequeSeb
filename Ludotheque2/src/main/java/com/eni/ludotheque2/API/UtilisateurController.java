@@ -24,6 +24,7 @@ public class UtilisateurController {
     @GetMapping
     public ResponseEntity<?> liste() {
         List<Utilisateur> utilisateurs = utilisateurService.findAllUtilisateurs();
+        Utilisateur utilisateur = utilisateurService.findByLogin("admin");
         if(utilisateurs == null || utilisateurs.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

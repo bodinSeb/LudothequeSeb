@@ -20,9 +20,9 @@ public class WebSecuConf {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
                                 //ATTENTIONL'ordre des permissions est importante
-                                .requestMatchers("/api/utilisateurs").permitAll()//hasAnyRole("admin")
-                                .requestMatchers("/api/clients/**", "/api/factures/**").hasAnyRole("admin", "employe")
-                                .requestMatchers("/api/login").permitAll()
+                                .requestMatchers("/api/utilisateurs").hasAnyRole("admin")
+                                .requestMatchers("/api/clients/**", "/api/locations/**", "/api/factures").hasAnyRole("admin", "employe")
+                                .requestMatchers("/api/jeux").permitAll()
                                 //.requestMatchers("/", "/home").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER") //permission
                                 //.requestMatchers("/", "/home/", "/public/**").permitAll() //pas besoin d'être connecté
                                 //.requestMatchers("/", "/home").hasAnyRole("ROLE_ADMIN", "ROLE_USER") //au-dessus permission
@@ -30,6 +30,7 @@ public class WebSecuConf {
 
                                 //Les routes restantes
                                 .anyRequest().authenticated()
+                                //.anyRequest().permitAll()
                         //.anyRequest().denyAll()
                 )
                 .httpBasic(Customizer.withDefaults());

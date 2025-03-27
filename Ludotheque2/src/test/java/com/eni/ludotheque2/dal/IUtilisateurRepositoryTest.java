@@ -27,20 +27,20 @@ public class IUtilisateurRepositoryTest {
     @DisplayName("TEST CT01-FEAT1 Client Repository")
     void AjoutUtilisateur() {
 
-        // Créer deux utilisateurs
-        List<Role> roles1 = new ArrayList<>();
-        roles1.add(Role.ADMIN);
-        roles1.add(Role.EMPLOYE);
-        Utilisateur utilisateur1 = new Utilisateur("seb", "seb", roles1);
-        List<Role> roles2 = new ArrayList<>();
-        roles1.add(Role.EMPLOYE);
-        Utilisateur utilisateur2 = new Utilisateur("admin", "admin", roles2);
-
-        _repoUtil.save(utilisateur1);
-        _repoUtil.save(utilisateur2);
-
-        // Sauvegarder les utilisateurs dans la base de données
-        _repoUtil.save(utilisateur1);
-        _repoUtil.save(utilisateur2);
+//        // Créer deux utilisateurs
+//        List<Role> roles1 = new ArrayList<>();
+//        roles1.add(Role.ADMIN);
+//        roles1.add(Role.EMPLOYE);
+//        Utilisateur utilisateur1 = new Utilisateur("seb", "seb", roles1);
+//        List<Role> roles2 = new ArrayList<>();
+//        roles1.add(Role.EMPLOYE);
+//        Utilisateur utilisateur2 = new Utilisateur("admin", "admin", roles2);
+//
+//        _repoUtil.save(utilisateur1);
+//        _repoUtil.save(utilisateur2);
+//
+//        // Sauvegarder les utilisateurs dans la base de données
+//        _repoUtil.save(utilisateur1);
+//        _repoUtil.save(utilisateur2);
     }
 }

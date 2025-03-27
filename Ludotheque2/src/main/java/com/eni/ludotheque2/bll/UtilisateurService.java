@@ -29,4 +29,10 @@ public class UtilisateurService implements IUtilisateurService{
         return utilRepository.findAll();
     }
 
+    @Override
+    public Utilisateur findByLogin(String login) {
+        Utilisateur util = utilRepository.findUtilisateurByLogin(login);
+        return util;
+    }
+
 }
