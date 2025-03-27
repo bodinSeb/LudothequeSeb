@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/clients")
 public class ClientController {
 
     @Autowired
     private IClientService clientService;
 
-    @GetMapping("/clients")
+    @GetMapping("")
     public ResponseEntity<List<Client>> getClients() {
         List<Client> clients = clientService.findAllClient();
         if(clients == null || clients.isEmpty()) {
@@ -27,7 +27,7 @@ public class ClientController {
         return ResponseEntity.ok(clients);
     }
 
-    @GetMapping("/client/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable Integer id) {
         Client client = clientService.findClientById(id);
         if(client == null) {
@@ -36,7 +36,7 @@ public class ClientController {
         return ResponseEntity.ok(client);
     }
 
-    @PostMapping ("/client")
+    @PostMapping ("")
     public ResponseEntity<?> create(@RequestBody  Client client) {
         clientService.ajouterClient(client);
         if(client.getId_client() == 0){
@@ -45,7 +45,7 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.OK).body("Le client a été créé avec succès");
     }
 
-    @PutMapping("/client/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody  Client client) {
         Client clientBase = clientService.findClientById(id);
         if(clientBase == null) {
@@ -62,7 +62,7 @@ public class ClientController {
         }
     }
 
-    @PatchMapping("/client/{id}/adresse")
+    @PatchMapping("/{id}/adresse")
     public ResponseEntity<?> updateAdresse(@PathVariable Integer id, @RequestBody Adresse adresse) {
         Client clientBase = clientService.findClientById(id);
         if(clientBase == null) {
@@ -78,7 +78,7 @@ public class ClientController {
         }
     }
 
-    @DeleteMapping("/client/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         Client clientBase = clientService.findClientById(id);
         if(clientBase == null) {

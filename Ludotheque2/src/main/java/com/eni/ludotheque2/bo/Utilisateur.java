@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Data
@@ -20,11 +23,12 @@ public class Utilisateur {
     @NonNull
     private String login;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     @NonNull
     private String password;
 
-    @Column(name = "isAdmin", nullable = false)
-    @NonNull
-    private Boolean isAdmin = false;
+    @ElementCollection
+    @CollectionTable(name = "utilisateur_roles", joinColumns = @JoinColumn(name = "utilisateur_id"))
+    @Column(name = "role", nullable = false)
+    private List<Role> roles = new ArrayList<>();
 }

@@ -18,19 +18,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/factures")
 public class FactureController {
 
     @Autowired
     private IFactureService factService;
 
 
-    @GetMapping("factures/{idClient}")
+    @GetMapping("/{idClient}")
     public ResponseEntity<List<Facture>> findFactureByIdClient(@PathVariable int idClient) {
         return ResponseEntity.ok(factService.findFactureByIdClient(idClient));
     }
 
-    @PostMapping("/facture")
+    @PostMapping("")
     public ResponseEntity<?> createFacture(@RequestBody CreateFacture cf) {
         try {
             Facture facture = factService.createFacture(cf.getIdsLoc(), cf.getIdClient());

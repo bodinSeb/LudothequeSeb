@@ -1,4 +1,5 @@
 package com.eni.ludotheque2.mock;
+import com.eni.ludotheque2.WebSecurityControl.MyUserDetailService;
 import com.eni.ludotheque2.bo.*;
 import com.eni.ludotheque2.dal.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class MockBD
     @Autowired
     ILocationRepository repoLoc;
     @Autowired
-    IUtilisateurRepository repoUtilisateur;
+    MyUserDetailService DetailService;
 
 //    @Override
 //    public void run(String... args) throws Exception {
@@ -107,12 +108,18 @@ public class MockBD
         repoExemplaire.save(exemplaire5);
 
         // Créer deux utilisateurs
+        List<Role> roles1 = new ArrayList<>();
+        roles1.add(Role.EMPLOYE);
         Utilisateur utilisateur1 = new Utilisateur("seb", "seb");
+        utilisateur1.setRoles(roles1);
+        List<Role> roles2 = new ArrayList<>();
+        roles2.add(Role.ADMIN);
+        roles2.add(Role.EMPLOYE);
         Utilisateur utilisateur2 = new Utilisateur("admin", "admin");
-        utilisateur2.setIsAdmin(true);
+        utilisateur2.setRoles(roles2);
 
-        repoUtilisateur.save(utilisateur1);
-        repoUtilisateur.save(utilisateur2);
+        DetailService.registerUse(utilisateur1);
+        DetailService.registerUse(utilisateur2);
 
         //Création de Locations
         Location location1 = new Location();
